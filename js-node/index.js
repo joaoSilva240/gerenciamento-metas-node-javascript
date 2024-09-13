@@ -67,6 +67,17 @@ const metasAbertas=async()=>{
         choices:[...abertas]
     })
 }
+const deletarMetas=async()=>{
+    const metasDesmarcadas=metas.map((meta)=>{
+        return {value:meta.value, checked:false}
+    })
+    const delet=await checkbox({
+        message:"escolha a meta para deletar",
+        choices:[...metasDesmarcadas],
+        instructions:false
+    })
+    
+}
 
 const start =async()=>{
     while(true){
@@ -89,6 +100,10 @@ const start =async()=>{
                     name:"metas abertas",
                     value:"abertas"
                 },
+                {
+                    name:"deletar metas",
+                    value:"deletar"
+                },
                 
                 {
                     name:"sair",
@@ -110,7 +125,10 @@ const start =async()=>{
                 await mostrarRealizadas()
                 break
             case "abertas":
-                await mostrarAbertas()
+                await metasAbertas()
+                break
+            case "deletar":
+                await deletarMetas()
                 break
             case "sair":
                 console.log("tchau")
